@@ -5,419 +5,476 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Calculator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+         /* CSS styles */
+        /* Your CSS styles here */
+
+        /* Other styles */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        /* Scientific Calculator styles */
+        #scientificCalculator {
+            display: block;
+        }
+
+        #scientificCalculator .calculator-output {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            text-align: right;
+        }
+
+        #scientificCalculator .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px; /* Increase the gap between buttons */
+            padding: 20px; /* Add padding around the grid of buttons */
+        }
+
+        #scientificCalculator .calculator-button {
+            padding: 15px; /* Increase the padding of each button */
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #1a73e8; /* Blue background color */
+            color: #fff; /* White text color */
+            transition: background-color 0.3s ease;
+        }
+
+        #scientificCalculator .calculator-button:hover {
+            background-color: #0e63e9; /* Darker blue on hover */
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f0f0f0;
-            font-size: 18px; /* Increased font size */
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f5f5f5;
         }
 
         .container {
-            max-width: 800px;
-            margin: 50px auto;
-            border-radius: 15px; /* Rounded corners */
-            overflow: hidden; /* Hide overflow for rounded corners */
-            padding: 20px;
-            background-color: #fff; /* White background */
+            max-width: 1050px;
+            width: 90%;
+            margin: auto;
         }
 
-        .tab {
-            margin-bottom: 20px; /* Increased space between tabs */
-        }
-
-        .tab button {
-            padding: 15px 25px; /* Increased padding */
-            background-color: #007bff; /* Blue background */
-            color: #fff; /* White text color */
-            border: none;
-            border-radius: 10px; /* Rounded corners */
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease; /* Transition for color change */
-            display: block;
+        .navbar {
             width: 100%;
-            text-align: left;
+            box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
         }
 
-        .tab button:hover {
-            background-color: #0056b3; /* Darker blue background on hover */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 62px;
         }
 
-        .tab button:focus {
-            outline: none; /* Remove button focus outline */
+        .navbar .menu-items {
+            display: flex;
+            margin-left: 30px; /* Add margin to space out the tabs */
         }
 
+        .navbar .nav-container li {
+            list-style: none;
+        }
+
+        .navbar .nav-container a {
+            text-decoration: none;
+            color: #0e2431;
+            font-weight: 500;
+            font-size: 1.2rem;
+            padding: 0.7rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-container a:hover {
+            color: #1a73e8;
+        }
+
+        .nav-container {
+            display: block;
+            position: relative;
+            height: 60px;
+        }
+
+        .nav-container .checkbox {
+            position: absolute;
+            display: block;
+            height: 32px;
+            width: 32px;
+            top: 20px;
+            left: 20px;
+            z-index: 5;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .nav-container .hamburger-lines {
+            display: block;
+            height: 26px;
+            width: 32px;
+            position: absolute;
+            top: 17px;
+            left: 20px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .nav-container .hamburger-lines .line {
+            display: block;
+            height: 4px;
+            width: 100%;
+            border-radius: 10px;
+            background: #0e2431;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .nav-container .hamburger-lines .line1 {
+            transform-origin: 0% 0%;
+        }
+
+        .nav-container .hamburger-lines .line3 {
+            transform-origin: 0% 100%;
+        }
+
+        .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+            transform: rotate(45deg);
+        }
+
+        .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+            transform: scaleY(0);
+        }
+
+        .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+            transform: rotate(-45deg);
+        }
+
+        .nav-container .menu-items {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align tabs to the start */
+            padding-top: 60px;
+        }
+
+        .nav-container .menu-items a {
+            margin-bottom: 20px;
+        }
+
+        .nav-container input[type="checkbox"]:checked ~ .menu-items {
+            transform: translateX(0);
+        }
+
+        .logo {
+            text-align: right;
+        }
+
+        /* Additional styling for tab content */
         .tab-content {
             display: none;
-            padding: 20px 0;
-            transition: opacity 0.3s ease;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Add margin bottom to space out tabs */
         }
 
-        .active-tab {
+        .tab-content.active-tab {
             display: block;
         }
 
-        label {
-            font-weight: bold;
+        .tab-content h3 {
+            margin-bottom: 20px;
         }
 
-        input[type="number"] {
-            width: calc(100% - 20px);
-            padding: 8px;
+        .tab-content label {
+            display: block;
             margin-bottom: 10px;
+            font-weight: 500;
         }
 
-        button {
+        .tab-content input[type="number"],
+        .tab-content input[type="checkbox"],
+        .tab-content select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .tab-content button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #1a73e8;
             color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .tab-content button:hover {
+            background-color: #0e63e9;
         }
 
-        .expense-input {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        /* Button logo */
-        #menuButton {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 9999;
-        }
-
-        #menuButton:focus {
-            outline: none; /* Remove button focus outline */
+        .tab-content p {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="tab">
-            <button onclick="openTab('interest')">Interest Calculator</button>
-        </div>
-        <div class="tab">
-            <button onclick="openTab('expenses')">Expenses Calculator</button>
-        </div>
-        <div class="tab">
-            <button onclick="openTab('currencyConverter')">Currency Converter</button>
-        </div>
-        <div class="tab">
-            <button onclick="openTab('appreciationDepreciation')">Appreciation/Depreciation</button>
-        </div>
-        <div class="tab">
-            <button onclick="openTab('taxPlanning')">Tax Planning</button>
-        </div>
-        <div class="tab">
-            <button onclick="openTab('stonks')">Stock Data</button>
-        </div>
-
-        <div id="interest" class="tab-content active-tab">
-            <h3>Interest Calculator</h3>
-            <label for="principal">Principal:</label>
-            <input type="number" name="principal" id="principal">
-            <label for="rate">Rate (%):</label>
-            <input type="number" name="rate" id="rate">
-            <label for="time">Time (years):</label>
-            <input type="number" name="time" id="time">
-            <label for="calculationType">Calculation Type:</label>
-            <input type="checkbox" name="calculationType" id="calculationType" onchange="toggleInterestType()"> Compound Interest
-            <button onclick="calculateInterest()">Calculate</button>
-            <p id="interestResult"></p>
-        </div>
-
-        <div id="expenses" class="tab-content">
-            <h3>Expenses Calculator</h3>
-            <div id="expenseInputs">
-                <label for="expense1">Expense 1:</label>
-                <input type="number" name="expense1" class="expense-input" id="expense1">
+<nav>
+    <div class="navbar">
+        <div class="container nav-container">
+            <input class="checkbox" type="checkbox" id="toggleNav" />
+            <div class="menu-items">
+                <li><a href="#" onclick="openTab('interest'); document.getElementById('toggleNav').checked = false;">Interest Calculator</a></li>
+                <li><a href="#" onclick="openTab('expenses'); document.getElementById('toggleNav').checked = false;">Expenses Calculator</a></li>
+                <li><a href="#" onclick="openTab('currencyConverter'); document.getElementById('toggleNav').checked = false;">Currency Converter</a></li>
+                <li><a href="#" onclick="openTab('appreciationDepreciation'); document.getElementById('toggleNav').checked = false;">Appreciation/Depreciation</a></li>
+                <li><a href="#" onclick="openTab('taxPlanning'); document.getElementById('toggleNav').checked = false;">Tax Planning</a></li>
             </div>
-            <button onclick="addExpenseInput()">Add Expense</button>
-            <button onclick="calculateExpenses()">Calculate Total</button>
-            <p id="expensesResult"></p>
-        </div>
-
-        <div id="currencyConverter" class="tab-content">
-            <h3>Currency Converter</h3>
-            <div>
-                <label for="fromCurrency">From Currency:</label>
-                <select id="fromCurrency">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="JPY">JPY</option>
-                </select>
-                <input type="number" name="fromAmount" id="fromAmount">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
             </div>
-            <div>
-                <label for="toCurrency">To Currency:</label>
-                <select id="toCurrency">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="JPY">JPY</option>
-                </select>
-                <input type="number" name="toAmount" id="toAmount">
+            <div class="logo">
+                <h1>Financial Calculator</h1>
             </div>
-            <button onclick="convertCurrency()">Convert</button>
-            <p id="currencyConversionResult"></p>
-        </div>
-
-        <div id="appreciationDepreciation" class="tab-content">
-            <h3>Appreciation/Depreciation Calculator</h3>
-            <label for="initialValue">Initial Value:</label>
-            <input type="number" name="initialValue" id="initialValue">
-            <label for="finalValue">Final Value:</label>
-            <input type="number" name="finalValue" id="finalValue">
-            <button onclick="calculateAppreciationDepreciation()">Calculate</button>
-            <p id="appreciationDepreciationResult"></p>
-        </div>
-
-        <div id="taxPlanning" class="tab-content">
-            <h3>Tax Planning</h3>
-            <label for="income">Income:</label>
-            <input type="number" name="income" id="income">
-            <label for="deductions">Deductions:</label>
-            <input type="number" name="deductions" id="deductions">
-            <label for="taxRate">Tax Rate (%):</label>
-            <input type="number" name="taxRate" id="taxRate">
-            <button onclick="calculateTax()">Calculate Tax</button>
-            <p id="taxResult"></p>
         </div>
     </div>
+</nav>
 
-    <div id="stonks" class="tab-content">
-        <p class="title">Stock App</p>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <style>
-
-            canvas {
-                display: block;
-                margin: 20px auto;
-                max-width: 100%;
-                height: 400px; /* Increase the height for better visibility */
-            }
-
-            label {
-                display: block;
-                margin-bottom: 10px;
-            }
-
-            input {
-                padding: 8px;
-                width: 60%;
-                font-size: 16px;
-            }
-
-            #stockInfo {
-                margin-top: 20px;
-            }
-
-            #peRatio {
-                margin-top: 20px;
-                font-weight: bold;
-            }
-        </style>
-        <body>
-
-        <main>
-            <label for="ticker">Enter Stock Ticker:</label>
-            <input type="text" id="ticker" placeholder="E.g: AAPL, MSFT">
-            <button onclick="fetchStockData()">Get Stock Data</button>
-
-            <canvas id="stockChart"></canvas>
-
-            <div id="stockInfo"></div>
-            <div id="peRatio"></div>
-        </main>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                window.fetchStockData = async function () {
-                    const ticker = document.getElementById('ticker').value.toUpperCase();
-                    const apiKey = 'DUNU0JBR036FMS1G'; // Replace with your Alpha Vantage API key
-                    const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${apiKey}`;
-
-                    try {
-                        const response = await fetch(apiUrl);
-                        const data = await response.json();
-
-                        if (data['Time Series (Daily)']) {
-                            const stockData = Object.entries(data['Time Series (Daily)']).map(([date, entry]) => ({
-                                date,
-                                close: parseFloat(entry['4. close']),
-                                high: parseFloat(entry['2. high']),
-                                low: parseFloat(entry['3. low']),
-                                open: parseFloat(entry['1. open']),
-                                volume: parseFloat(entry['5. volume'])
-                            }));
-
-                            createStockChart(stockData.reverse());
-                            displayStockInfo(stockData);
-                            calculatePE(stockData);
-                        } else {
-                            alert('No data available for the given ticker');
-                        }
-                    } catch (error) {
-                        console.error('Error fetching stock data:', error);
-                    }
-                };
-
-                function createStockChart(stockData) {
-                    const dates = stockData.map(entry => entry.date);
-                    const closingPrices = stockData.map(entry => entry.close);
-
-                    const ctx = document.getElementById('stockChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: dates,
-                            datasets: [{
-                                label: 'Closing Prices',
-                                borderColor: 'rgb(75, 192, 192)',
-                                data: closingPrices,
-                            }]
-                        }
-                    });
-                }
-
-                function displayStockInfo(stockData) {
-                    const latestEntry = stockData[stockData.length - 1];
-
-                    document.getElementById('stockInfo').innerHTML = `
-                        <p>Current Stock Price: ${latestEntry.close.toFixed(2)}</p>
-                        <p>Today's High: ${latestEntry.high.toFixed(2)}</p>
-                        <p>Today's Low: ${latestEntry.low.toFixed(2)}</p>
-                        <p>Today's Volume: ${latestEntry.volume.toFixed(2)}</p>
-                        <p>Today's Open Price: ${latestEntry.open.toFixed(2)}</p>
-                    `;
-                }
-
-                function calculatePE(stockData) {
-                    const latestClosingPrice = stockData[stockData.length - 1].close;
-                    const earningsPerShare = 5;  // Replace with actual earnings per share
-                    const peRatio = latestClosingPrice / earningsPerShare;
-
-                    document.getElementById('peRatio').innerHTML = `<p>P/E Ratio: ${peRatio.toFixed(2)}</p>`;
-                }
-            });
-        </script>
+<div class="container">
+    <div id="scientificCalculator" class="tab-content active-tab">
+        <div class="calculator-output" id="calculatorOutput">0</div>
+        <div class="calculator-buttons">
+            <button class="calculator-button" onclick="addToOutput(1)">1</button>
+            <button class="calculator-button" onclick="addToOutput(2)">2</button>
+            <button class="calculator-button" onclick="addToOutput(3)">3</button>
+            <button class="calculator-button" onclick="addToOutput('+')">+</button>
+            <button class="calculator-button" onclick="addToOutput(4)">4</button>
+            <button class="calculator-button" onclick="addToOutput(5)">5</button>
+            <button class="calculator-button" onclick="addToOutput(6)">6</button>
+            <button class="calculator-button" onclick="addToOutput('-')">-</button>
+            <button class="calculator-button" onclick="addToOutput(7)">7</button>
+            <button class="calculator-button" onclick="addToOutput(8)">8</button>
+            <button class="calculator-button" onclick="addToOutput(9)">9</button>
+            <button class="calculator-button" onclick="addToOutput('*')">*</button>
+            <button class="calculator-button" onclick="addToOutput(0)">0</button>
+            <button class="calculator-button" onclick="addToOutput('.')">.</button>
+            <button class="calculator-button" onclick="addToOutput('/')">/</button>
+            <button class="calculator-button" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+    <!-- Interest Calculator -->
+    <div id="interest" class="tab-content">
+        <h3>Interest Calculator</h3>
+        <label for="principal">Principal:</label>
+        <input type="number" name="principal" id="principal">
+        <label for="rate">Rate (%):</label>
+        <input type="number" name="rate" id="rate">
+        <label for="time">Time (years):</label>
+        <input type="number" name="time" id="time">
+        <label for="calculationType">Calculation Type:</label>
+        <select id="calculationType">
+            <option value="simple">Simple Interest</option>
+            <option value="compound">Compound Interest</option>
+        </select>
+        <button onclick="calculateInterest()">Calculate</button>
+        <p id="interestResult"></p>
     </div>
 
-    <!-- Button logo -->
-    <button id="menuButton" onclick="toggleSidebar">&#9776;</button>
+    <div id="expenses" class="tab-content">
+        <h3>Expenses Calculator</h3>
+        <div id="expenseInputs">
+            <label for="expense1">Expense 1:</label>
+            <input type="number" class="expense-input" id="expense1">
+        </div>
+        <button class="add-task-btn" onclick="addExpenseInput()">Add Expense</button>
+        <button onclick="calculateExpenses()">Calculate Expenses</button>
+        <p id="expensesResult"></p>
+    </div>
+    
+    <!-- Appreciation/Depreciation Calculator -->
+    <div id="appreciationDepreciation" class="tab-content">
+        <h3>Appreciation/Depreciation Calculator</h3>
+        <label for="initialValue">Initial Value:</label>
+        <input type="number" name="initialValue" id="initialValue">
+        <label for="finalValue">Final Value:</label>
+        <input type="number" name="finalValue" id="finalValue">
+        <button onclick="calculateAppreciationDepreciation()">Calculate</button>
+        <p id="appreciationDepreciationResult"></p>
+    </div>
 
-    <script>
-        function openTab(tabName) {
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => {
-                if (tab.id === tabName) {
-                    tab.classList.add('active-tab');
-                } else {
-                    tab.classList.remove('active-tab');
-                }
-            });
+    <!-- Currency Converter -->
+    <div id="currencyConverter" class="tab-content">
+        <h3>Currency Converter</h3>
+        <div>
+            <label for="fromCurrency">From Currency:</label>
+            <select id="fromCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="JPY">JPY</option>
+            </select>
+            <input type="number" name="fromAmount" id="fromAmount">
+        </div>
+        <div>
+            <label for="toCurrency">To Currency:</label>
+            <select id="toCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="JPY">JPY</option>
+            </select>
+            <input type="number" name="toAmount" id="toAmount">
+        </div>
+        <button onclick="convertCurrency()">Convert</button>
+        <p id="currencyConversionResult"></p>
+    </div>
+
+    <!-- Tax Planning -->
+    <div id="taxPlanning" class="tab-content">
+        <h3>Tax Planning</h3>
+        <label for="income">Income:</label>
+        <input type="number" name="income" id="income">
+        <label for="deductions">Deductions:</label>
+        <input type="number" name="deductions" id="deductions">
+        <label for="taxRate">Tax Rate (%):</label>
+        <input type="number" name="taxRate" id="taxRate">
+        <button onclick="calculateTax()">Calculate Tax</button>
+        <p id="taxResult"></p>
+    </div>
+</div>
+
+<script>
+// Functionality for Interest Calculator tab
+function calculateInterest() {
+    const principal = parseFloat(document.getElementById('principal').value);
+    const rate = parseFloat(document.getElementById('rate').value);
+    const time = parseFloat(document.getElementById('time').value);
+    const calculationType = document.getElementById('calculationType').value;
+
+    let interest;
+    if (calculationType === 'compound') {
+        interest = principal * Math.pow((1 + rate / 100), time) - principal;
+    } else {
+        interest = (principal * rate * time) / 100;
+    }
+
+    document.getElementById('interestResult').innerText = `Interest: $${interest.toFixed(2)}`;
+}
+
+// Functionality for Expenses Calculator tab
+function addExpenseInput() {
+    const container = document.getElementById('expenseInputs');
+    const newInput = document.createElement('div');
+    newInput.innerHTML = `
+        <label for="expense${container.children.length + 1}">Expense ${container.children.length}:</label>
+        <input type="number" class="expense-input" id="expense${container.children.length + 1}">
+    `;
+    container.appendChild(newInput);
+}
+
+function calculateExpenses() {
+    let totalExpenses = 0;
+    const expenseInputs = document.querySelectorAll('.expense-input');
+    expenseInputs.forEach(input => {
+        const expenseValue = parseFloat(input.value);
+        if (!isNaN(expenseValue)) {
+            totalExpenses += expenseValue;
         }
+    });
+    document.getElementById('expensesResult').innerText = `Total Expenses: $${totalExpenses.toFixed(2)}`;
+}
 
-        function toggleInterestType() {
-            const checkbox = document.getElementById('calculationType');
-            const label = document.querySelector('label[for="calculationType"]');
-            label.innerText = checkbox.checked ? 'Compound Interest' : 'Simple Interest';
+// Functionality for Appreciation/Depreciation Calculator tab
+function calculateAppreciationDepreciation() {
+    const initialValue = parseFloat(document.getElementById('initialValue').value);
+    const finalValue = parseFloat(document.getElementById('finalValue').value);
+    const change = finalValue - initialValue;
+    const percentChange = (change / initialValue) * 100;
+
+    if (percentChange > 0) {
+        document.getElementById('appreciationDepreciationResult').innerText = `Appreciation: $${change.toFixed(2)} (${percentChange.toFixed(2)}%)`;
+    } else if (percentChange < 0) {
+        document.getElementById('appreciationDepreciationResult').innerText = `Depreciation: $${Math.abs(change).toFixed(2)} (${Math.abs(percentChange).toFixed(2)}%)`;
+    } else {
+        document.getElementById('appreciationDepreciationResult').innerText = `No change`;
+    }
+}
+
+// Functionality for Currency Converter tab
+function convertCurrency() {
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    const fromAmount = parseFloat(document.getElementById('fromAmount').value);
+    const toAmount = fromAmount * getExchangeRate(fromCurrency, toCurrency);
+    document.getElementById('toAmount').value = toAmount.toFixed(2);
+}
+
+function getExchangeRate(fromCurrency, toCurrency) {
+    return fromCurrency === toCurrency ? 1 : 0.85; // Replace with actual exchange rates
+}
+
+// Functionality for Tax Planning tab
+function calculateTax() {
+    const income = parseFloat(document.getElementById('income').value);
+    const deductions = parseFloat(document.getElementById('deductions').value);
+    const taxRate = parseFloat(document.getElementById('taxRate').value);
+    const taxableIncome = income - deductions;
+    const taxAmount = (taxableIncome * taxRate) / 100;
+    document.getElementById('taxResult').innerText = `Tax Owed: $${taxAmount.toFixed(2)}`;
+}
+
+let currentOutput = '';
+
+function addToOutput(value) {
+    currentOutput += value;
+    document.getElementById('calculatorOutput').innerText = currentOutput;
+}
+
+function calculateResult() {
+    try {
+        const result = eval(currentOutput);
+        document.getElementById('calculatorOutput').innerText = result;
+    } catch (error) {
+        document.getElementById('calculatorOutput').innerText = 'Error';
+    }
+    currentOutput = '';
+}
+
+function openTab(tabName) {
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+        if (tab.id === tabName) {
+            tab.classList.add('active-tab');
+        } else {
+            tab.classList.remove('active-tab');
         }
-
-        function calculateInterest() {
-            const principal = parseFloat(document.getElementById('principal').value);
-            const rate = parseFloat(document.getElementById('rate').value);
-            const time = parseFloat(document.getElementById('time').value);
-            const isCompoundInterest = document.getElementById('calculationType').checked;
-
-            let interest;
-            if (isCompoundInterest) {
-                interest = principal * Math.pow((1 + rate / 100), time) - principal;
-            } else {
-                interest = (principal * rate * time) / 100;
-            }
-
-            document.getElementById('interestResult').innerText = `Interest: $${interest.toFixed(2)}`;
-        }
-
-        function addExpenseInput() {
-            const container = document.getElementById('expenseInputs');
-            const newInput = document.createElement('div');
-            newInput.innerHTML = `
-                <label for="expense${container.children.length + 1}">Expense ${container.children.length}:</label>
-                <input type="number" class="expense-input" id="expense${container.children.length + 1}">
-            `;
-            container.appendChild(newInput);
-        }
-
-        function calculateExpenses() {
-            let totalExpenses = 0;
-            const expenseInputs = document.querySelectorAll('.expense-input');
-            expenseInputs.forEach(input => {
-                const expenseValue = parseFloat(input.value);
-                if (!isNaN(expenseValue)) {
-                    totalExpenses += expenseValue;
-                }
-            });
-            document.getElementById('expensesResult').innerText = `Total Expenses: $${totalExpenses.toFixed(2)}`;
-        }
-
-        function convertCurrency() {
-            const fromCurrency = document.getElementById('fromCurrency').value;
-            const toCurrency = document.getElementById('toCurrency').value;
-            const fromAmount = parseFloat(document.getElementById('fromAmount').value);
-            const toAmount = fromAmount * getExchangeRate(fromCurrency, toCurrency);
-            document.getElementById('toAmount').value = toAmount.toFixed(2);
-        }
-
-        function getExchangeRate(fromCurrency, toCurrency) {
-            return fromCurrency === toCurrency ? 1 : 0.85; // Replace with actual exchange rates
-        }
-
-        function calculateAppreciationDepreciation() {
-            const initialValue = parseFloat(document.getElementById('initialValue').value);
-            const finalValue = parseFloat(document.getElementById('finalValue').value);
-            const change = finalValue - initialValue;
-            const percentChange = (change / initialValue) * 100;
-
-            if (percentChange > 0) {
-                document.getElementById('appreciationDepreciationResult').innerText = `Appreciation: $${change.toFixed(2)} (${percentChange.toFixed(2)}%)`;
-            } else if (percentChange < 0) {
-                document.getElementById('appreciationDepreciationResult').innerText = `Depreciation: $${Math.abs(change).toFixed(2)} (${Math.abs(percentChange).toFixed(2)}%)`;
-            } else {
-                document.getElementById('appreciationDepreciationResult').innerText = `No change`;
-            }
-        }
-
-        function calculateTax() {
-            const income = parseFloat(document.getElementById('income').value);
-            const deductions = parseFloat(document.getElementById('deductions').value);
-            const taxRate = parseFloat(document.getElementById('taxRate').value);
-            const taxableIncome = income - deductions;
-            const taxAmount = (taxableIncome * taxRate) / 100;
-            document.getElementById('taxResult').innerText = `Tax Owed: $${taxAmount.toFixed(2)}`;
-        }
-
-        function toggleSidebar() {
-            const container = document.querySelector('.container');
-            container.classList.toggle('sidebar-open');
-        }
-    </script>
+    });
+}
+</script>
 </body>
 </html>
