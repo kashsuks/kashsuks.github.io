@@ -11,50 +11,64 @@
             padding: 0;
             box-sizing: border-box;
             background-color: #f0f0f0;
+            font-size: 18px;
         }
+
         .container {
             max-width: 800px;
             margin: 50px auto;
+            border-radius: 15px;
+            overflow: hidden;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
+            transition: padding-left 0.3s ease;
         }
-        .tabs {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            gap: 20px; /* Increase the gap between tabs */
-        }
+
         .tab {
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .tab button {
             padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
-            border-radius: 5px 5px 0 0;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: block;
+            width: 100%;
+            text-align: left;
         }
-        .tab:hover {
+
+        .tab button:hover {
             background-color: #0056b3;
         }
+
+        .tab button:focus {
+            outline: none;
+        }
+
         .tab-content {
-            display: none;
             padding: 20px 0;
             transition: opacity 0.3s ease;
         }
+
         .active-tab {
             display: block;
         }
+
         label {
             font-weight: bold;
         }
+
         input[type="number"] {
             width: calc(100% - 20px);
             padding: 8px;
             margin-bottom: 10px;
         }
+
         button {
             padding: 10px 20px;
             background-color: #007bff;
@@ -64,60 +78,69 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .expense-input {
             display: block;
             margin-bottom: 10px;
         }
-        /* Stocks tab styling */
-        .tab {
-            padding: 10px 20px;
+
+        #menuButton {
+            position: fixed;
+            top: 20px;
+            left: 20px;
             background-color: #007bff;
             color: #fff;
-            border-radius: 5px 5px 0 0;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .tab:hover {
-            background-color: #0056b3;
-        }
-        #stocks {
-            display: none;
-        }
-        #stocks.active-tab {
-            display: block;
-        }
-        #stockGraph {
-            margin-top: 10px;
+            border: none;
+            border-radius: 50%;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            cursor: pointer;
+            z-index: 9999;
+            transition: left 0.3s ease;
+        }
+
+        #menuButton:focus {
+            outline: none;
+        }
+
+        .sidebar-open {
+            padding-left: 250px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="tabs">
-            <div class="tab" onclick="openTab('interest')">Interest Calculator</div>
-            <div class="tab" onclick="openTab('expenses')">Expenses Calculator</div>
-            <div class="tab" onclick="openTab('currencyConverter')">Currency Converter</div>
-            <div class="tab" onclick="openTab('appreciationDepreciation')">Appreciation/Depreciation</div>
-            <div class="tab" onclick="openTab('taxPlanning')">Tax Planning</div>
+        <button id="menuButton" onclick="toggleSidebar">&#9776;</button>
+
+        <div class="tab">
+            <button onclick="openTab('interest')">Interest Calculator</button>
+        </div>
+        <div class="tab">
+            <button onclick="openTab('expenses')">Expenses Calculator</button>
+        </div>
+        <div class="tab">
+            <button onclick="openTab('currencyConverter')">Currency Converter</button>
+        </div>
+        <div class="tab">
+            <button onclick="openTab('appreciationDepreciation')">Appreciation/Depreciation</button>
+        </div>
+        <div class="tab">
+            <button onclick="openTab('taxPlanning')">Tax Planning</button>
         </div>
 
-        <div id="interest" class="tab-content active-tab">
+        <div id="interest" class="tab-content">
             <h3>Interest Calculator</h3>
             <label for="principal">Principal:</label>
-            <input type="number" id="principal">
+            <input type="number" name="principal" id="principal">
             <label for="rate">Rate (%):</label>
-            <input type="number" id="rate">
+            <input type="number" name="rate" id="rate">
             <label for="time">Time (years):</label>
-            <input type="number" id="time">
+            <input type="number" name="time" id="time">
             <label for="calculationType">Calculation Type:</label>
-            <input type="checkbox" id="calculationType" onchange="toggleInterestType()"> Compound Interest
+            <input type="checkbox" name="calculationType" id="calculationType" onchange="toggleInterestType()"> Compound Interest
             <button onclick="calculateInterest()">Calculate</button>
             <p id="interestResult"></p>
         </div>
@@ -126,7 +149,7 @@
             <h3>Expenses Calculator</h3>
             <div id="expenseInputs">
                 <label for="expense1">Expense 1:</label>
-                <input type="number" class="expense-input" id="expense1">
+                <input type="number" name="expense1" class="expense-input" id="expense1">
             </div>
             <button onclick="addExpenseInput()">Add Expense</button>
             <button onclick="calculateExpenses()">Calculate Total</button>
@@ -143,7 +166,7 @@
                     <option value="GBP">GBP</option>
                     <option value="JPY">JPY</option>
                 </select>
-                <input type="number" id="fromAmount">
+                <input type="number" name="fromAmount" id="fromAmount">
             </div>
             <div>
                 <label for="toCurrency">To Currency:</label>
@@ -153,7 +176,7 @@
                     <option value="GBP">GBP</option>
                     <option value="JPY">JPY</option>
                 </select>
-                <input type="number" id="toAmount">
+                <input type="number" name="toAmount" id="toAmount">
             </div>
             <button onclick="convertCurrency()">Convert</button>
             <p id="currencyConversionResult"></p>
@@ -162,9 +185,9 @@
         <div id="appreciationDepreciation" class="tab-content">
             <h3>Appreciation/Depreciation Calculator</h3>
             <label for="initialValue">Initial Value:</label>
-            <input type="number" id="initialValue">
+            <input type="number" name="initialValue" id="initialValue">
             <label for="finalValue">Final Value:</label>
-            <input type="number" id="finalValue">
+            <input type="number" name="finalValue" id="finalValue">
             <button onclick="calculateAppreciationDepreciation()">Calculate</button>
             <p id="appreciationDepreciationResult"></p>
         </div>
@@ -172,19 +195,17 @@
         <div id="taxPlanning" class="tab-content">
             <h3>Tax Planning</h3>
             <label for="income">Income:</label>
-            <input type="number" id="income">
+            <input type="number" name="income" id="income">
             <label for="deductions">Deductions:</label>
-            <input type="number" id="deductions">
+            <input type="number" name="deductions" id="deductions">
             <label for="taxRate">Tax Rate (%):</label>
-            <input type="number" id="taxRate">
+            <input type="number" name="taxRate" id="taxRate">
             <button onclick="calculateTax()">Calculate Tax</button>
             <p id="taxResult"></p>
         </div>
     </div>
 
     <script>
-        let expenseCount = 1;
-
         function openTab(tabName) {
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => {
@@ -218,65 +239,15 @@
             document.getElementById('interestResult').innerText = `Interest: $${interest.toFixed(2)}`;
         }
 
-        function addExpenseInput() {
-            expenseCount++;
-            const container = document.getElementById('expenseInputs');
-            const newInput = document.createElement('div');
-            newInput.innerHTML = `
-                <label for="expense${expenseCount}">Expense ${expenseCount}:</label>
-                <input type="number" class="expense-input" id="expense${expenseCount}">
-            `;
-            container.appendChild(newInput);
-        }
-
-        function calculateExpenses() {
-            let totalExpenses = 0;
-            for (let i = 1; i <= expenseCount; i++) {
-                const expenseValue = parseFloat(document.getElementById(`expense${i}`).value);
-                if (!isNaN(expenseValue)) {
-                    totalExpenses += expenseValue;
-                }
-            }
-            document.getElementById('expensesResult').innerText = `Total Expenses: $${totalExpenses.toFixed(2)}`;
-        }
-
-        // Currency Converter functions
-        function convertCurrency() {
-            const fromCurrency = document.getElementById('fromCurrency').value;
-            const toCurrency = document.getElementById('toCurrency').value;
-            const fromAmount = parseFloat(document.getElementById('fromAmount').value);
-            const toAmount = fromAmount * getExchangeRate(fromCurrency, toCurrency);
-            document.getElementById('toAmount').value = toAmount.toFixed(2);
-        }
-
-        function getExchangeRate(fromCurrency, toCurrency) {
-            return fromCurrency === toCurrency ? 1 : 0.85; // Replace with actual exchange rates
-        }
-
-        // Appreciation/Depreciation calculator function
-        function calculateAppreciationDepreciation() {
-            const initialValue = parseFloat(document.getElementById('initialValue').value);
-            const finalValue = parseFloat(document.getElementById('finalValue').value);
-            const change = finalValue - initialValue;
-            const percentChange = (change / initialValue) * 100;
-
-            if (percentChange > 0) {
-                document.getElementById('appreciationDepreciationResult').innerText = `Appreciation: $${change.toFixed(2)} (${percentChange.toFixed(2)}%)`;
-            } else if (percentChange < 0) {
-                document.getElementById('appreciationDepreciationResult').innerText = `Depreciation: $${Math.abs(change).toFixed(2)} (${Math.abs(percentChange).toFixed(2)}%)`;
-            } else {
-                document.getElementById('appreciationDepreciationResult').innerText = `No change`;
-            }
-        }
-
-        // Tax Planning calculator function
-        function calculateTax() {
-            const income = parseFloat(document.getElementById('income').value);
-            const deductions = parseFloat(document.getElementById('deductions').value);
-            const taxRate = parseFloat(document.getElementById('taxRate').value);
-            const taxableIncome = income - deductions;
-            const taxAmount = (taxableIncome * taxRate) / 100;
-            document.getElementById('taxResult').innerText = `Tax Owed: $${taxAmount.toFixed(2)}`;
+        function toggleSidebar() {
+            const container = document.querySelector('.container');
+            container.classList.toggle('sidebar-open');
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.style.display = container.classList.contains('sidebar-open') ? 'block' : 'none';
+            });
+            const button = document.getElementById('menuButton');
+            button.style.left = container.classList.contains('sidebar-open') ? '250px' : '20px';
         }
     </script>
 </body>
