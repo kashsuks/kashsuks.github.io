@@ -123,6 +123,9 @@
         <div class="tab">
             <button onclick="openTab('taxPlanning')">Tax Planning</button>
         </div>
+        <div class="tab">
+            <button onclick="openTab('stonks')">Stock Data</button>
+        </div>
 
         <div id="interest" class="tab-content active-tab">
             <h3>Interest Calculator</h3>
@@ -196,6 +199,124 @@
             <button onclick="calculateTax()">Calculate Tax</button>
             <p id="taxResult"></p>
         </div>
+    </div>
+
+    <div id="stonks" class="tab-content">
+        <p class="title">Stock App</p>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+
+            canvas {
+                display: block;
+                margin: 20px auto;
+                max-width: 100%;
+                height: 400px; /* Increase the height for better visibility */
+            }
+
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            input {
+                padding: 8px;
+                width: 60%;
+                font-size: 16px;
+            }
+
+            #stockInfo {
+                margin-top: 20px;
+            }
+
+            #peRatio {
+                margin-top: 20px;
+                font-weight: bold;
+            }
+        </style>
+        <body>
+
+        <main>
+            <label for="ticker">Enter Stock Ticker:</label>
+            <input type="text" id="ticker" placeholder="E.g: AAPL, MSFT">
+            <button onclick="fetchStockData()">Get Stock Data</button>
+
+            <canvas id="stockChart"></canvas>
+
+            <div id="stockInfo"></div>
+            <div id="peRatio"></div>
+        </main>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                window.fetchStockData = async function () {
+                    const ticker = document.getElementById('ticker').value.toUpperCase();
+                    const apiKey = '2X8AHKH6M7SLGS8H'; // Replace with your Alpha Vantage API key
+                    const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${ticker}&apikey=${apiKey}`;
+
+                    try {
+                        const response = await fetch(apiUrl);
+                        const data = await response.json();
+
+                        if (data['Time Series (Daily)']) {
+                            const stockData = Object.entries(data['Time Series (Daily)']).map(([date, entry]) => ({
+                                date,
+                                close: parseFloat(entry['4. close']),
+                                high: parseFloat(entry['2. high']),
+                                low: parseFloat(entry['3. low']),
+                                open: parseFloat(entry['1. open']),
+                                volume: parseFloat(entry['5. volume'])
+                            }));
+
+                            createStockChart(stockData.reverse());
+                            displayStockInfo(stockData);
+                            calculatePE(stockData);
+                        } else {
+                            alert('No data available for the given ticker');
+                        }
+                    } catch (error) {
+                        console.error('Error fetching stock data:', error);
+                    }
+                };
+
+                function createStockChart(stockData) {
+                    const dates = stockData.map(entry => entry.date);
+                    const closingPrices = stockData.map(entry => entry.close);
+
+                    const ctx = document.getElementById('stockChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Closing Prices',
+                                borderColor: 'rgb(75, 192, 192)',
+                                data: closingPrices,
+                            }]
+                        }
+                    });
+                }
+
+                function displayStockInfo(stockData) {
+                    const latestEntry = stockData[stockData.length - 1];
+
+                    document.getElementById('stockInfo').innerHTML = `
+                        <p>Current Stock Price: ${latestEntry.close.toFixed(2)}</p>
+                        <p>Today's High: ${latestEntry.high.toFixed(2)}</p>
+                        <p>Today's Low: ${latestEntry.low.toFixed(2)}</p>
+                        <p>Today's Volume: ${latestEntry.volume.toFixed(2)}</p>
+                        <p>Today's Open Price: ${latestEntry.open.toFixed(2)}</p>
+                    `;
+                }
+
+                function calculatePE(stockData) {
+                    const latestClosingPrice = stockData[stockData.length - 1].close;
+                    const earningsPerShare = 5;  // Replace with actual earnings per share
+                    const peRatio = latestClosingPrice / earningsPerShare;
+
+                    document.getElementById('peRatio').innerHTML = `<p>P/E Ratio: ${peRatio.toFixed(2)}</p>`;
+                }
+            });
+        </script>
     </div>
 
     <!-- Button logo -->
