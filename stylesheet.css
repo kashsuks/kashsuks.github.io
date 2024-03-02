@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+.tabs {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Increase the gap between tabs */
+}
+.tab {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.tab:hover {
+    background-color: #0056b3;
+}
+.tab-content {
+    display: none;
+    padding: 20px 0;
+    transition: opacity 0.3s ease;
+}
+.active-tab {
+    display: block;
+}
+label {
+    font-weight: bold;
+}
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+}
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.expense-input {
+    display: block;
+    margin-bottom: 10px;
+}
+/* Stocks tab styling */
+.tab {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.tab:hover {
+    background-color: #0056b3;
+}
