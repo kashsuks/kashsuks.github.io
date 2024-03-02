@@ -11,46 +11,45 @@
             padding: 0;
             box-sizing: border-box;
             background-color: #f0f0f0;
-            font-size: 18px;
+            font-size: 18px; /* Increased font size */
         }
 
         .container {
             max-width: 800px;
             margin: 50px auto;
-            border-radius: 15px;
-            overflow: hidden;
+            border-radius: 15px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow for rounded corners */
             padding: 20px;
-            background-color: #fff;
-            transition: padding-left 0.3s ease;
+            background-color: #fff; /* White background */
         }
 
         .tab {
-            margin-bottom: 20px;
-            display: none;
+            margin-bottom: 20px; /* Increased space between tabs */
         }
 
         .tab button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+            padding: 15px 25px; /* Increased padding */
+            background-color: #007bff; /* Blue background */
+            color: #fff; /* White text color */
             border: none;
-            border-radius: 5px;
+            border-radius: 10px; /* Rounded corners */
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Transition for color change */
             display: block;
             width: 100%;
             text-align: left;
         }
 
         .tab button:hover {
-            background-color: #0056b3;
+            background-color: #0056b3; /* Darker blue background on hover */
         }
 
         .tab button:focus {
-            outline: none;
+            outline: none; /* Remove button focus outline */
         }
 
         .tab-content {
+            display: none;
             padding: 20px 0;
             transition: opacity 0.3s ease;
         }
@@ -88,10 +87,11 @@
             margin-bottom: 10px;
         }
 
+        /* Button logo */
         #menuButton {
             position: fixed;
             top: 20px;
-            left: 20px;
+            right: 20px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -99,22 +99,15 @@
             padding: 10px;
             cursor: pointer;
             z-index: 9999;
-            transition: left 0.3s ease;
         }
 
         #menuButton:focus {
-            outline: none;
-        }
-
-        .sidebar-open {
-            padding-left: 250px;
+            outline: none; /* Remove button focus outline */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <button id="menuButton" onclick="toggleSidebar">&#9776;</button>
-
         <div class="tab">
             <button onclick="openTab('interest')">Interest Calculator</button>
         </div>
@@ -131,7 +124,7 @@
             <button onclick="openTab('taxPlanning')">Tax Planning</button>
         </div>
 
-        <div id="interest" class="tab-content">
+        <div id="interest" class="tab-content active-tab">
             <h3>Interest Calculator</h3>
             <label for="principal">Principal:</label>
             <input type="number" name="principal" id="principal">
@@ -205,6 +198,9 @@
         </div>
     </div>
 
+    <!-- Button logo -->
+    <button id="menuButton" onclick="toggleSidebar">&#9776;</button>
+
     <script>
         function openTab(tabName) {
             const tabs = document.querySelectorAll('.tab-content');
@@ -239,15 +235,67 @@
             document.getElementById('interestResult').innerText = `Interest: $${interest.toFixed(2)}`;
         }
 
+        function addExpenseInput() {
+            const container = document.getElementById('expenseInputs');
+            const newInput = document.createElement('div');
+            newInput.innerHTML = `
+                <label for="expense${container.children.length + 1}">Expense ${container.children.length}:</label>
+                <input type="number" class="expense-input" id="expense${container.children.length + 1}">
+            `;
+            container.appendChild(newInput);
+        }
+
+        function calculateExpenses() {
+            let totalExpenses = 0;
+            const expenseInputs = document.querySelectorAll('.expense-input');
+            expenseInputs.forEach(input => {
+                const expenseValue = parseFloat(input.value);
+                if (!isNaN(expenseValue)) {
+                    totalExpenses += expenseValue;
+                }
+            });
+            document.getElementById('expensesResult').innerText = `Total Expenses: $${totalExpenses.toFixed(2)}`;
+        }
+
+        function convertCurrency() {
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+            const fromAmount = parseFloat(document.getElementById('fromAmount').value);
+            const toAmount = fromAmount * getExchangeRate(fromCurrency, toCurrency);
+            document.getElementById('toAmount').value = toAmount.toFixed(2);
+        }
+
+        function getExchangeRate(fromCurrency, toCurrency) {
+            return fromCurrency === toCurrency ? 1 : 0.85; // Replace with actual exchange rates
+        }
+
+        function calculateAppreciationDepreciation() {
+            const initialValue = parseFloat(document.getElementById('initialValue').value);
+            const finalValue = parseFloat(document.getElementById('finalValue').value);
+            const change = finalValue - initialValue;
+            const percentChange = (change / initialValue) * 100;
+
+            if (percentChange > 0) {
+                document.getElementById('appreciationDepreciationResult').innerText = `Appreciation: $${change.toFixed(2)} (${percentChange.toFixed(2)}%)`;
+            } else if (percentChange < 0) {
+                document.getElementById('appreciationDepreciationResult').innerText = `Depreciation: $${Math.abs(change).toFixed(2)} (${Math.abs(percentChange).toFixed(2)}%)`;
+            } else {
+                document.getElementById('appreciationDepreciationResult').innerText = `No change`;
+            }
+        }
+
+        function calculateTax() {
+            const income = parseFloat(document.getElementById('income').value);
+            const deductions = parseFloat(document.getElementById('deductions').value);
+            const taxRate = parseFloat(document.getElementById('taxRate').value);
+            const taxableIncome = income - deductions;
+            const taxAmount = (taxableIncome * taxRate) / 100;
+            document.getElementById('taxResult').innerText = `Tax Owed: $${taxAmount.toFixed(2)}`;
+        }
+
         function toggleSidebar() {
             const container = document.querySelector('.container');
             container.classList.toggle('sidebar-open');
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.style.display = container.classList.contains('sidebar-open') ? 'block' : 'none';
-            });
-            const button = document.getElementById('menuButton');
-            button.style.left = container.classList.contains('sidebar-open') ? '250px' : '20px';
         }
     </script>
 </body>
