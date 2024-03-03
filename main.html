@@ -138,6 +138,7 @@
 
         .navbar .nav-container li {
             list-style: none;
+            margin-bottom: 25px;
         }
 
         .navbar .nav-container a {
@@ -300,6 +301,7 @@
         <div class="container nav-container">
             <input class="checkbox" type="checkbox" id="toggleNav" />
             <div class="menu-items">
+                <li><a href="#" onclick="openTab('home'); document.getElementById('toggleNav').checked = false;">Home</a></li>
                 <li><a href="#" onclick="openTab('interest'); document.getElementById('toggleNav').checked = false;">Interest Calculator</a></li>
                 <li><a href="#" onclick="openTab('expenses'); document.getElementById('toggleNav').checked = false;">Expenses Calculator</a></li>
                 <li><a href="#" onclick="openTab('currencyConverter'); document.getElementById('toggleNav').checked = false;">Currency Converter</a></li>
@@ -319,6 +321,7 @@
     </div>
 </nav>
 
+<div id="home" class="tab-content">
 <div class="container">
     <div class="widget">
         <h2>Welcome to the Complete Financial Manager</h2>
@@ -338,12 +341,16 @@
     </div>
 
     <footer>
-        <p>Made by Kashyap Sukshavai</p>
+        <strong><p>Made by Kashyap Sukshavai</i></p></strong>
         <div class="footer-logos">
+            <p>Kashyap Sukshavasi</p>
             <a href="https://www.instagram.com/kashyaplvtech/"><img src="images/instagram_logo.jpg" alt="Instagram Logo"></a>
             <a href="https://github.com/kashsuks"><img src="images/github_logo.png" alt="GitHub Logo"></a>
         </div>
     </footer>
+</div>
+</div> 
+
     <!-- Interest Calculator -->
     <div id="interest" class="tab-content">
         <h3>Interest Calculator</h3>
@@ -690,10 +697,14 @@ function openTab(tabName) {
 
     // Toggle the visibility of the financial calculator based on the selected tab
     const financialCalculator = document.getElementById('scientificCalculator');
+    const homepage = document.getElementById('homepage');
+
     if (tabName === 'scientificCalculator') {
         financialCalculator.style.display = 'block';
+        homepage.style.display = 'none'; // Hide homepage
     } else {
         financialCalculator.style.display = 'none';
+        homepage.style.display = 'block'; // Show homepage
     }
 }
 
@@ -702,7 +713,7 @@ populateCurrencyDropdown();
 
 // Set the default tab to be visible when the page loads
 document.addEventListener('DOMContentLoaded', function () {
-    openTab('scientificCalculator');
+    openTab('home');
 });
 </script>
 </body>
