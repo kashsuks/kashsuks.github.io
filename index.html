@@ -58,13 +58,14 @@
         .login-container {
             z-index: 1; /* Ensure login form appears above the background */
             position: relative;
-            background-color: #fff;
+            background-color: #fff; /* Added background color */
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 300px;
             width: 90%;
             text-align: center;
+            margin-bottom: 20px; /* Added margin to create space for the bottom text */
         }
 
         .login-container h2 {
@@ -105,6 +106,15 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        /* Added style for bottom right text */
+        .bottom-text {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -142,6 +152,7 @@
         <input type="submit" value="Login">
         <p id="loginMessage"></p>
     </form>
+    <div class="bottom-text">Made by Kashyap Sukshavasi</div> <!-- Added bottom text -->
 </div>
 
 <script>
