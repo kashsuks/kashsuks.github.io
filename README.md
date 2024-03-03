@@ -9,6 +9,7 @@ This is a web-based financial calculator application that provides various finan
 - **Currency Converter:** Convert currencies using live exchange rates from Open Exchange Rates API.
 - **Appreciation/Depreciation Calculator:** Calculate appreciation or depreciation between initial and final values.
 - **Tax Planning:** Calculate tax owed based on income, deductions, and tax rate.
+- **Stocks App:** Find stock prices based on ticker information.
 
 ## How to Use
 
