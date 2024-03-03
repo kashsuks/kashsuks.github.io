@@ -367,7 +367,9 @@
         </select>
         <button onclick="calculateInterest()">Calculate</button>
         <p id="interestResult"></p>
+        <p id="totalMoney"></p>
     </div>
+    
 
     <div id="expenses" class="tab-content">
         <h3>Expenses Calculator</h3>
@@ -500,6 +502,11 @@
                     }
                 };
 
+                function handleNewStockData() {
+                    const ticker = document.getElementById('ticker').value.toUpperCase();
+                    fetchStockData(ticker);
+                }
+
                 function createStockChart(stockData) {
                     const dates = stockData.map(entry => entry.date);
                     const closingPrices = stockData.map(entry => entry.close);
@@ -545,6 +552,10 @@
 
 <script>
 // Functionality for Interest Calculator tab
+function closeSidebar() {
+        document.getElementById('toggleNav').checked = false;
+    }
+
 function calculateInterest() {
     const principal = parseFloat(document.getElementById('principal').value);
     const rate = parseFloat(document.getElementById('rate').value);
@@ -558,7 +569,14 @@ function calculateInterest() {
         interest = (principal * rate * time) / 100;
     }
 
+    // Calculate total money (principal + interest)
+    const totalMoney = principal + interest;
+
+    // Display interest and total money
     document.getElementById('interestResult').innerText = `Interest: $${interest.toFixed(2)}`;
+    document.getElementById('totalMoney').innerText = `Total Money: $${totalMoney.toFixed(2)}`;
+
+    closeSidebar();
 }
 
 // Functionality for Expenses Calculator tab
@@ -582,6 +600,8 @@ function calculateExpenses() {
         }
     });
     document.getElementById('expensesResult').innerText = `Total Expenses: $${totalExpenses.toFixed(2)}`;
+
+    closeSidebar();
 }
 
 // Functionality for Appreciation/Depreciation Calculator tab
@@ -598,6 +618,8 @@ function calculateAppreciationDepreciation() {
     } else {
         document.getElementById('appreciationDepreciationResult').innerText = `No change`;
     }
+
+    closeSidebar();
 }
 
 async function convertCurrency() {
@@ -622,6 +644,8 @@ async function convertCurrency() {
         console.error("Error fetching conversion rate:", error.message);
         document.getElementById('currencyConversionResult').innerText = "Error converting currency. Please try again later.";
     }
+
+    closeSidebar();
 }
 
 async function populateCurrencyDropdown() {
@@ -666,6 +690,8 @@ function calculateTax() {
     const taxableIncome = income - deductions;
     const taxAmount = (taxableIncome * taxRate) / 100;
     document.getElementById('taxResult').innerText = `Tax Owed: $${taxAmount.toFixed(2)}`;
+
+    closeSidebar();
 }
 
 let currentOutput = '';
@@ -686,27 +712,16 @@ function calculateResult() {
 }
 
 function openTab(tabName) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => {
-        if (tab.id === tabName) {
-            tab.classList.add('active-tab');
-        } else {
-            tab.classList.remove('active-tab');
-        }
-    });
-
-    // Toggle the visibility of the financial calculator based on the selected tab
-    const financialCalculator = document.getElementById('scientificCalculator');
-    const homepage = document.getElementById('homepage');
-
-    if (tabName === 'scientificCalculator') {
-        financialCalculator.style.display = 'block';
-        homepage.style.display = 'none'; // Hide homepage
-    } else {
-        financialCalculator.style.display = 'none';
-        homepage.style.display = 'block'; // Show homepage
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => {
+            if (tab.id === tabName) {
+                tab.classList.add('active-tab');
+            } else {
+                tab.classList.remove('active-tab');
+            }
+        });
+        closeSidebar(); // Close sidebar when a tab is opened
     }
-}
 
 // Call this function to populate the currency dropdowns when the page loads
 populateCurrencyDropdown();
