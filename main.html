@@ -11,42 +11,95 @@
         /* Other styles */
         @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-        /* Scientific Calculator styles */
-        #scientificCalculator {
-            display: block;
-        }
+        .section-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
 
-        #scientificCalculator .calculator-output {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 18px;
-            text-align: right;
-        }
+.about-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
 
-        #scientificCalculator .calculator-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px; /* Increase the gap between buttons */
-            padding: 20px; /* Add padding around the grid of buttons */
-        }
+.about-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
 
-        #scientificCalculator .calculator-button {
-            padding: 15px; /* Increase the padding of each button */
-            font-size: 18px;
+.about-section p {
+    color: #666;
+}
+        
+        footer {
+            margin-top: 50px; /* Add margin top to space out footer */
+            background-color: white;
+            color: black;
             text-align: center;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #1a73e8; /* Blue background color */
-            color: #fff; /* White text color */
-            transition: background-color 0.3s ease;
+            padding: 20px 0;
         }
 
-        #scientificCalculator .calculator-button:hover {
-            background-color: #0e63e9; /* Darker blue on hover */
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px; /* Add margin to space out links */
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Instagram and GitHub logo styles */
+        .footer-logos {
+            margin-top: 10px; /* Add margin top to space out logos */
+        }
+
+        .footer-logos img {
+            width: 30px;
+            height: auto;
+            margin: 0 5px; /* Add margin to space out logos */
+        }
+        
+        .about-contact-section {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-contact-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .about-contact-section p {
+            color: #666;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .widget {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .widget h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .widget p {
+            margin-bottom: 0;
+            color: #666;
         }
 
         * {
@@ -267,27 +320,30 @@
 </nav>
 
 <div class="container">
-    <div id="scientificCalculator" class="tab-content active-tab">
-        <div class="calculator-output" id="calculatorOutput">0</div>
-        <div class="calculator-buttons">
-            <button class="calculator-button" onclick="addToOutput(1)">1</button>
-            <button class="calculator-button" onclick="addToOutput(2)">2</button>
-            <button class="calculator-button" onclick="addToOutput(3)">3</button>
-            <button class="calculator-button" onclick="addToOutput('+')">+</button>
-            <button class="calculator-button" onclick="addToOutput(4)">4</button>
-            <button class="calculator-button" onclick="addToOutput(5)">5</button>
-            <button class="calculator-button" onclick="addToOutput(6)">6</button>
-            <button class="calculator-button" onclick="addToOutput('-')">-</button>
-            <button class="calculator-button" onclick="addToOutput(7)">7</button>
-            <button class="calculator-button" onclick="addToOutput(8)">8</button>
-            <button class="calculator-button" onclick="addToOutput(9)">9</button>
-            <button class="calculator-button" onclick="addToOutput('*')">*</button>
-            <button class="calculator-button" onclick="addToOutput(0)">0</button>
-            <button class="calculator-button" onclick="addToOutput('.')">.</button>
-            <button class="calculator-button" onclick="addToOutput('/')">/</button>
-            <button class="calculator-button" onclick="calculateResult()">=</button>
+    <div class="widget">
+        <h2>Welcome to the Complete Financial Manager</h2>
+        <p>To start off, click on the sidebar on the left and choose a calculator. Have fun!</p>
+    </div>
+
+    <div class="section-container">
+        <div class="about-section">
+            <h2>About Me</h2>
+            <p>This financial calculator was created by Kashyap Sukshavasi. I am passionate about finance and programming, and I created this tool to help people manage their finances more effectively.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Check out the code for this website</h2>
+            <p>You can find the source code for this financial calculator on GitHub. <a href="https://github.com/kashsuks">Click here</a> to view the code.</p>
         </div>
     </div>
+
+    <footer>
+        <p>Made by Kashyap Sukshavai</p>
+        <div class="footer-logos">
+            <a href="https://www.instagram.com/kashyaplvtech/"><img src="images/instagram_logo.jpg" alt="Instagram Logo"></a>
+            <a href="https://github.com/kashsuks"><img src="images/github_logo.png" alt="GitHub Logo"></a>
+        </div>
+    </footer>
     <!-- Interest Calculator -->
     <div id="interest" class="tab-content">
         <h3>Interest Calculator</h3>
