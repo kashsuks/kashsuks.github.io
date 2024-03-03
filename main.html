@@ -511,7 +511,23 @@ function openTab(tabName) {
             tab.classList.remove('active-tab');
         }
     });
+
+    // Toggle the visibility of the financial calculator based on the selected tab
+    const financialCalculator = document.getElementById('scientificCalculator');
+    if (tabName === 'scientificCalculator') {
+        financialCalculator.style.display = 'block';
+    } else {
+        financialCalculator.style.display = 'none';
+    }
 }
+
+// Call this function to populate the currency dropdowns when the page loads
+populateCurrencyDropdown();
+
+// Set the default tab to be visible when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    openTab('scientificCalculator');
+});
 </script>
 </body>
 </html>
