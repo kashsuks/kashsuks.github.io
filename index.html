@@ -4,41 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="login.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background: #a6a9d9;
+            font-family: Arial, sans-serif;
+        }
+
+        .background {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            background: #82b4d3;
+        }
+
+        .background span {
+            width: 15vmin;
+            height: 15vmin;
+            border-radius: 15vmin;
+            backface-visibility: hidden;
+            position: absolute;
+            animation: move infinite linear;
+        }
+
+        @keyframes move {
+            100% {
+                transform: translate3d(0, 0, 1px) rotate(360deg);
+            }
+        }
+
+        .background span:nth-child(1) {
+            color: #54a1bb;
+            top: 19%;
+            left: 76%;
+            animation-duration: 17s;
+            animation-delay: -39s;
+            transform-origin: 1vw 21vh;
+            box-shadow: 30vmin 0 4.704088285370859vmin currentColor;
+        }
+
+        /* Repeat for other spans */
+
+        .login-container {
+            z-index: 1; /* Ensure login form appears above the background */
+            position: relative;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm" onsubmit="return validateLogin()">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
-            <p id="loginMessage"></p>
-        </form>
-    </div>
 
-    <script>
-        function validateLogin() {
-            // Dummy validation
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
+<div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
-            // Check if username and password are entered (dummy check)
-            if (username.trim() === "" || password.trim() === "") {
-                document.getElementById("loginMessage").innerHTML = "Please enter username and password.";
-                return false;
-            }
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="return validateLogin()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Login">
+        <p id="loginMessage"></p>
+    </form>
+</div>
 
-            // Dummy successful login
-            document.getElementById("loginMessage").innerHTML = "Login successful. Redirecting...";
-            setTimeout(function() {
-                window.location.href = "main.html"; // Redirect to financial calculator page
-            }, 2000); // Redirect after 2 seconds (adjust as needed)
-            
-            return false; // Prevent form submission
+<script>
+    function validateLogin() {
+        // Dummy validation
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        // Check if username and password are entered (dummy check)
+        if (username.trim() === "" || password.trim() === "") {
+            document.getElementById("loginMessage").innerHTML = "Please enter username and password.";
+            return false;
         }
-    </script>
+
+        // Dummy successful login
+        document.getElementById("loginMessage").innerHTML = "Login successful. Redirecting...";
+        setTimeout(function() {
+            window.location.href = "index.html"; // Redirect to financial calculator page
+        }, 2000); // Redirect after 2 seconds (adjust as needed)
+
+        return false; // Prevent form submission
+    }
+</script>
+
 </body>
 </html>
