@@ -308,6 +308,7 @@
                 <li><a href="#" onclick="openTab('appreciationDepreciation'); document.getElementById('toggleNav').checked = false;">AEPR/DEPR</a></li>
                 <li><a href="#" onclick="openTab('taxPlanning'); document.getElementById('toggleNav').checked = false;">Tax Planning</a></li>
                 <li><a href="#" onclick="openTab('stockApp'); document.getElementById('toggleNav').checked = false;">Stocks App</a></li>
+                <li><a href="#" onclick="openTab('retirementCalc'); document.getElementById('toggleNav').checked = false;">Retirement Calculator</a></li>
             </div>
             <div class="hamburger-lines">
                 <span class="line line1"></span>
@@ -540,6 +541,62 @@
             });
         </script>
       </div>
+
+      <div id="retirementCalc" class="tab-content">
+        <h3>Retirement Calculator</h3>
+        <div class="calculator-container mt-4">
+
+            <form id="calculatorForm">
+                <div class="form-group row">
+                    <label for="currentAge" class="col-sm-6 col-form-label">Current Age:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="currentAge" oninput="formatInput(this)" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="retirementAge" class="col-sm-6 col-form-label">Expected Retirement Age:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="retirementAge" oninput="formatInput(this)" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="currentSavings" class="col-sm-6 col-form-label">Current Savings:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="currentSavings" oninput="formatInput(this)" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="annualDeposit" class="col-sm-6 col-form-label">Annual Deposit (savings):</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="annualDeposit" oninput="formatInput(this)" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="interestRate" class="col-sm-6 col-form-label">Interest Rate (deposit):</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="interestRate" oninput="formatInput(this)" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <button type="button" class="btn btn-danger form-control" onclick="clearForm()">Clear All</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-primary form-control" onclick="calculateRetirement()">Calculate</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="results-container" id="resultsContainer">
+                <h2>Retirement Details</h2>
+                <p><strong>Years until retirement:</strong> <span id="yearsUntilRetirement"></span></p>
+                <p><strong>Required savings per year:</strong> $<span id="requiredSavingsPerYear"></span></p>
+                <p><strong>Total savings needed:</strong> $<span id="totalSavingsNeeded"></span></p>
+            </div>
+
+        </div>
+      </div>
+
     </div>
     </div>
 
@@ -715,6 +772,45 @@ populateCurrencyDropdown();
 document.addEventListener('DOMContentLoaded', function () {
     openTab('home');
 });
+
+function clearForm() {
+    document.getElementById("calculatorForm").reset();
+    document.getElementById("resultsContainer").style.display = "none";
+}
+
+function calculateRetirement() {
+    const currentAge = parseFloat(document.getElementById("currentAge").value.replace(/,/g, ''));
+    const retirementAge = parseFloat(document.getElementById("retirementAge").value.replace(/,/g, ''));
+    const currentSavings = parseFloat(document.getElementById("currentSavings").value.replace(/,/g, ''));
+    const annualDeposit = parseFloat(document.getElementById("annualDeposit").value.replace(/,/g, ''));
+    const interestRate = parseFloat(document.getElementById("interestRate").value.replace(/,/g, ''));
+
+    if (isNaN(currentAge) || isNaN(retirementAge) || isNaN(currentSavings) || isNaN(annualDeposit) || isNaN(interestRate)) {
+        alert("Please enter valid numerical values for all fields.");
+        return;
+    }
+
+    const yearsUntilRetirement = retirementAge - currentAge;
+    const requiredSavingsPerYear = (currentSavings + annualDeposit * yearsUntilRetirement) / yearsUntilRetirement;
+    const totalSavingsNeeded = (currentSavings + annualDeposit * yearsUntilRetirement) * (1 + interestRate / 100);
+
+    document.getElementById("yearsUntilRetirement").innerText = yearsUntilRetirement;
+    document.getElementById("requiredSavingsPerYear").innerText = requiredSavingsPerYear.toFixed(2).toLocaleString();
+    document.getElementById("totalSavingsNeeded").innerText = totalSavingsNeeded.toFixed(2).toLocaleString();
+
+    document.getElementById("resultsContainer").style.display = "block";
+}
+
+function formatInput(input) {
+    const value = parseFloat(input.value.replace(/,/g, ''));
+
+    if (isNaN(value)) {
+        input.value = '0';
+    } else {
+        input.value = value.toLocaleString();
+    }
+}
+
 </script>
 </body>
 </html>
