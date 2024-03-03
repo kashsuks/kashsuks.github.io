@@ -333,20 +333,12 @@
         <div>
             <label for="fromCurrency">From Currency:</label>
             <select id="fromCurrency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="JPY">JPY</option>
             </select>
             <input type="number" name="fromAmount" id="fromAmount">
         </div>
         <div>
             <label for="toCurrency">To Currency:</label>
             <select id="toCurrency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="JPY">JPY</option>
             </select>
             <input type="number" name="toAmount" id="toAmount">
         </div>
@@ -425,18 +417,63 @@ function calculateAppreciationDepreciation() {
     }
 }
 
-// Functionality for Currency Converter tab
-function convertCurrency() {
+async function convertCurrency() {
+    const apiKey = 'e8e362ad58044528b68ad4d640741624'; // Replace 'YOUR_API_KEY' with your actual API key
     const fromCurrency = document.getElementById('fromCurrency').value;
     const toCurrency = document.getElementById('toCurrency').value;
     const fromAmount = parseFloat(document.getElementById('fromAmount').value);
-    const toAmount = fromAmount * getExchangeRate(fromCurrency, toCurrency);
-    document.getElementById('toAmount').value = toAmount.toFixed(2);
+
+    try {
+        const response = await fetch(`https://open.er-api.com/v6/latest/${fromCurrency}`);
+        const data = await response.json();
+        const exchangeRates = data.rates;
+        
+        if (exchangeRates.hasOwnProperty(toCurrency)) {
+            const exchangeRate = exchangeRates[toCurrency];
+            const toAmount = fromAmount * exchangeRate;
+            document.getElementById('toAmount').value = toAmount.toFixed(2);
+        } else {
+            throw new Error("Conversion rate not available for selected currency.");
+        }
+    } catch (error) {
+        console.error("Error fetching conversion rate:", error.message);
+        document.getElementById('currencyConversionResult').innerText = "Error converting currency. Please try again later.";
+    }
 }
 
-function getExchangeRate(fromCurrency, toCurrency) {
-    return fromCurrency === toCurrency ? 1 : 0.85; // Replace with actual exchange rates
+async function populateCurrencyDropdown() {
+    try {
+        const response = await fetch("https://open.er-api.com/v6/latest/USD");
+        const data = await response.json();
+        const exchangeRates = data.rates;
+        
+        const currencyDropdownFrom = document.getElementById('fromCurrency');
+        const currencyDropdownTo = document.getElementById('toCurrency');
+        
+        // Populate dropdowns with currency options
+        Object.keys(exchangeRates).forEach(async currency => {
+            const optionFrom = document.createElement('option');
+            const optionTo = document.createElement('option');
+            optionFrom.value = currency;
+            optionFrom.textContent = currency;
+            optionTo.value = currency;
+            optionTo.textContent = currency;
+            currencyDropdownFrom.appendChild(optionFrom);
+            currencyDropdownTo.appendChild(optionTo);
+        });
+
+        // Set default value to USD for 'fromCurrency' and EUR for 'toCurrency'
+        currencyDropdownFrom.value = 'USD';
+        currencyDropdownTo.value = 'EUR';
+        
+    } catch (error) {
+        console.error("Error fetching currencies:", error.message);
+    }
 }
+
+// Call this function to populate the currency dropdowns when the page loads
+populateCurrencyDropdown();
+
 
 // Functionality for Tax Planning tab
 function calculateTax() {
