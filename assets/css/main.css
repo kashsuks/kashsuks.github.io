@@ -1,0 +1,113 @@
+/* Google fonts Read Hat Display*/
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700&display=swap');
+
+/* Google fonts Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #6638EB;
+    --secondary-color: #FFD200;
+    --black-color: #07122A;
+    --gray-color: #ABAFB4;
+}
+
+a {
+    color: var(--primary-color);
+}
+
+.navbar-brand,
+section.content {
+    font-family: 'Red hat display';
+    color: var(--black-color);
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+a.nav-link {
+    margin: 0 1rem;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--black-color);
+    font-family: 'Inter';
+}
+
+section.content {
+    padding: 3rem;
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.text {
+    padding: 56px 0;
+}
+
+.text h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.text p {
+    font-size: 25px;
+    font-weight: 400;
+    min-width: 500px;
+    max-width: 100%;
+    margin: 0 auto;
+    color: var(--gray-color);
+}
+
+footer {
+    text-align: center;
+}
+
+footer p {
+    padding: 1rem 0;
+    font-size: 16px;
+    color: var(--gray-color);
+    font-weight: 400;
+}
+
+hr {
+    color: var(--gray-color);
+    height: 2px;
+}
+
+/* Small devices (landscape phones, 576px and up)*/
+
+@media (max-width: 576px) {
+
+    a.nav-link {
+        margin: 0;
+    }
+
+    section.content img {
+        width: 300px;
+    }
+
+    .text h1 {
+        font-size: 25px;
+    }
+
+    .text p {
+        font-size: 14px;
+        font-weight: 400;
+        min-width: 300px;
+    }
+
+    footer p {
+        padding: 0.5rem 0;
+        font-size: 14px;
+    }
+
+    hr {
+        display: none;
+    }
+
+
+}
