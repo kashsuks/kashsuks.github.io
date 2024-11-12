@@ -82,7 +82,7 @@ const introduction = [
         </p>
         <div class="hidden">_</div>
         <p class="whoami">
-            I specialize in <b>software development</b> and <b>competitiove programming</b>, aiming to create <b class="highlight-white">innovative apps</b> that change our world through means of <b class= "highlight-white">efficient applications</b>. With a strong foundation in coding and a keen eye for <b class="highlight-white">detail</b>, I excel in <b class="highlight-white">problem-solving</b> and enhancing <b class="highlight-white"> security measures</b>.
+            I specialize in <b>software development</b> and <b>competitive programming</b>, aiming to create <b class="highlight-white">innovative apps</b> that change our world through means of <b class= "highlight-white">efficient applications</b>. With a strong foundation in coding and a keen eye for <b class="highlight-white">detail</b>, I excel in <b class="highlight-white">problem-solving</b> and enhancing <b class="highlight-white"> security measures</b>.
         </p>
         <p class="whoami">
             My <b>goal</b> is to contribute to projects that advance <b class= "highlight-white">technology</b> while ensuring <b class= "highlight-white">secure user experiences</b>. I enjoy learning new <b class= "highlight-white">technologies</b> and collaborating with others to develop effective <b class= "highlight-white">solutions</b>.
