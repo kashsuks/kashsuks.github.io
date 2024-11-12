@@ -1,0 +1,16 @@
+.typing {
+    margin-left: 10px;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: type 2s steps(14, end);
+}
+
+@keyframes type {
+    from {
+        width: 0;
+    }
+    to {
+        width: 120px;
+    }
+}

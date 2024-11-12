@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio | Kashyap Sukshavasi</title>
+        <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+        <link rel="stylesheet" href="css/colors.css">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/terminal-window.css">
+        <link rel="stylesheet" href="css/terminal.css">
+        <link rel="stylesheet" href="css/typing.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="css/matrix.css">
+    </head>
+    <body>
+        <!-- socials -->
+        <div class="floating-socials">
+            <a href="https://github.com/shkev03" target="_blank">
+                <img src="images/github.png" alt="GitHub">
+            </a>
+            <a href="https://www.instagram.com/shkev03/" target="_blank">
+                <img src="images/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://www.twitter.com/shkev03/" target="_blank">
+                <img src="images/twitter.png" alt="Twitter">
+            </a>
+            <a target="_blank" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ksukshavasi@gmail.com">
+                <img src="images/email.png" alt="Email">
+            </a>
+        </div>
+
+        <!-- navbar -->
+        <div class="navbar">
+            <img class="logo" src="images/logo.png" alt="Logo">
+
+            <div class="nav-menu">
+                <button onclick="auto('home', 1400)" class="Home btnTransparent">
+                    Home
+                </button>
+                <button onclick="auto('about', 1000)" class="About btnTransparent">
+                    About
+                </button>
+                <button onclick="auto('work', 2000)" class="btnTransparent">
+                    Work
+                </button>
+                <button onclick="auto('contact', 2000)" class="btnSolid">
+                    <div class="hover"><p>Contact</p></div>
+                    Contact
+                </button>
+            </div>
+            <button onclick="showSidebar()" class="btnTransparent menu-btn">
+                <img src="images/menu.png" alt="">
+            </button>
+        </div>
+        <!-- side navbar -->
+        <div class="sidebar">
+            <div class="nav-menu">
+                <button onclick="hideSidebar()" class="btnTransparent close-menu-btn">
+                    <img src="images/close.png" alt="">
+                </button>
+                <button onclick="auto('home', 1400)" class="Home btnTransparent">
+                    Home
+                </button>
+                <button onclick="auto('about', 1000)" class="About btnTransparent">
+                    About
+                </button>
+                <button onclick="auto('work', 2000)" class="btnTransparent">
+                    Work
+                </button>
+                <button onclick="auto('contact', 2000)" class="btnSolid">
+                    <div class="hover"><p>Contact</p></div>
+                    Contact
+                </button>
+
+                <div class="socials">
+                    <a href="https://github.com/kashsuks" target="_blank">
+                        <img src="images/github.png" alt="GitHub">
+                    </a>
+                    <a href="https://www.instagram.com/kashyaplvtech/" target="_blank">
+                        <img src="images/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.twitter.com/shkev03/" target="_blank">
+                        <img src="images/twitter.png" alt="Twitter">
+                    </a>
+                    <a target="_blank" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=ksukshavasi@gmail.com">
+                        <img src="images/email.png" alt="Email">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- terminal window -->
+        <div class="container">
+            <div class="terminal-windows">
+                <!-- Titlebar -->
+                <div class="title">
+                    <div class="left non-select">
+                        <img src="images/terminal-icon.png" alt="">
+                    </div>
+                    <p class="title-text non-select">
+                        Terminal ~ kashyap@portfolio
+                    </p>
+                    <div class="right">
+                        <button onclick="error('Minimize Button is Disable!')">
+                            <img src="images/hide.png" alt="" class="hide">
+                        </button>
+                        <button onclick="maximize();">
+                            <img src="images/maximize.png" alt="" class="max">
+                        </button>
+                        <button class="close-btn" onclick="error('Close Button is Disable!')">
+                            <img src="images/close.png" alt="" class="close">
+                        </button>
+                    </div>
+                </div>
+                <!-- Terminal -->
+                <div class="terminal" id="terminal" onclick="focusInput()">
+                    <!-- output -->
+                    <div class="output">
+                        <div class="help-log comment">
+                            Enter <b class="command">'help'</b> command to know
+                            the available commands.
+                        </div>
+                    </div>
+                    <!-- input -->
+                    <div class="input" id="input">
+                        <div class="prompt">
+                            <p class="user">kashyap@portfolio</p>
+                            [
+                            <p class="location" id="path">~/</p>
+                            ] -&gt;
+                        </div>
+                        <input type="text" id="command" class="command" autofocus="" autocomplete="off">
+                    </div>
+                    <div class="scrollTo"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Incapatible Display -->
+        <div class="incapatible">
+            <h1>Incapatible</h1>
+            <h2>This Mobile Display Resolution is not supported.</h2>
+            <p>
+                Please Try using a bigger display size like tablet, laptop or
+                PC.
+            </p>
+        </div>
+        <!-- error message -->
+        <div class="error-message" id="error">Error Message is here</div>
+
+        <!-- background -->
+        <canvas id="matrixCanvas"></canvas>
+
+        <!-- scripts -->
+        <script src="js/script.js"></script>
+        <script src="js/cd.js"></script>
+        <script src="js/pwd.js"></script>
+        <script src="js/ls.js"></script>
+        <script src="js/cat.js"></script>
+        <script src="js/output.js"></script>
+        <script src="js/auto.js"></script>
+        <script src="js/matrix.js"></script>
+    
+
+</body></html>

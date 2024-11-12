@@ -1,0 +1,130 @@
+.terminal {
+    padding: 10px;
+    padding-top: 5px;
+    height: 400px;
+    background: var(--terminal);
+    border-radius: 0 0 5px 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-right: 5px;
+    margin-top: 5px;
+    cursor: text;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.prompt .cmd {
+    color: #fff;
+    margin-left: 10px;
+}
+
+.prompt {
+    display: flex;
+    color: var(--location);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    /* font-family: monospace; */
+}
+
+.prompt .user {
+    color: var(--user);
+}
+
+.prompt .location {
+    color: var(--location);
+}
+
+.input input {
+    flex: 1;
+    color: #ffffff;
+    border: none;
+    font-size: 14px;
+    background: inherit;
+    padding-left: 8px;
+}
+
+.comment {
+    color: var(--comment);
+    font-size: 12px;
+}
+
+.command {
+    color: var(--command);
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.output {
+    color: #d1d1d1de;
+    font-size: 14px;
+}
+
+.link {
+    color: var(--link);
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.directory {
+    display: flex;
+    flex-direction: column;
+}
+
+.directory .folder {
+    color: var(--folder);
+}
+
+.hidden {
+    display: none;
+}
+
+.introduction,
+.whoami {
+    color: #fff;
+}
+
+.introduction strong {
+    color: var(--highlight);
+    font-weight: 600;
+}
+
+.whoami b {
+    color: var(--highlight-secondary);
+}
+
+.whoami b.highlight-white {
+    color: var(--highlight-tritry);
+}
+
+.banner {
+    font-family: monospace;
+}
+
+.folder {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.folder .comment {
+    color: rgb(234, 234, 234);
+    padding-left: 15px;
+}
+
+.folder:hover {
+    color: var(--command);
+}
+
+.files {
+    color: var(--files) !important;
+    text-decoration: none;
+}
+
+.scrollTo {
+    height: 20px;
+}

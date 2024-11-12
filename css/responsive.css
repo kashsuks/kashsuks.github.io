@@ -1,0 +1,76 @@
+.incapatible {
+    display: none;
+    position: absolute;
+    justify-content: end;
+    padding: 20px;
+    top: 0px;
+    bottom: 0px;
+    z-index: -0;
+}
+
+.incapatible h1 {
+    color: red;
+}
+
+.incapatible h2 {
+    color: white;
+    font-size: 20px;
+}
+
+.incapatible p {
+    color: grey;
+    margin-bottom: 100px;
+}
+
+@media (max-width: 890px) {
+    .menu-btn {
+        display: block;
+    }
+    .navbar .nav-menu {
+        display: none;
+    }
+    .terminal-windows {
+        width: 97% !important;
+    }
+    .maximized .terminal-windows {
+        width: 100% !important;
+    }
+    .floating-socials {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .terminal-windows .title .title-text {
+        left: 0;
+        width: fit-content !important;
+        margin-left: 30px;
+    }
+    .sidebar {
+        width: calc(100% - 40px);
+    }
+    .maximized .terminal-windows {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        background: #000 !important;
+    }
+    .terminal-windows {
+        display: none;
+    }
+    .navbar {
+        z-index: 11;
+    }
+    .incapatible {
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+        background: black;
+    }
+    .matrixCanvas {
+        display: none;
+    }
+}

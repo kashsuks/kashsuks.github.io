@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "SpaceMono";
+    src: url("../fonts/SpaceMono-Regular.ttf");
+}
+
+* {
+    outline: none;
+    padding: 0;
+    margin: 0;
+    font-family: SpaceMono, monospace;
+}
+
+body {
+    width: 100vw;
+    height: 100dvh;
+    background-color: #222624;
+    display: flex;
+    flex-direction: column;
+    max-width: 1440;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    background-color: inherit;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#error {
+    position: absolute;
+    right: 20px;
+    bottom: 100px;
+    background-color: #ff6d6d18;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    color: White;
+    border: 1px solid #ff737346;
+    font-size: 14px;
+    display: none;
+    z-index: 100;
+}
+
+.non-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px; /* Adjust the width as needed */
+}
+
+::-webkit-scrollbar-track {
+    margin: 5px;
+    background: #272c2c;
+    border-radius: 10px;
+    border: 2px solid #272c2c;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 2px solid #272c2c;
+    background: #8888884e; /* Change the thumb color */
+    border-radius: 10px; /* Round the corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5555558e; /* Change the thumb color on hover */
+}
