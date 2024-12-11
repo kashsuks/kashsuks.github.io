@@ -1,4 +1,4 @@
-# KashSuks.github.io
+# kashsuks.github.io
 
 Hi there! Welcome to my personal portfolio repository. My name is Kashyap Sukshavasi, and I’m a high school student passionate about competitive programming, data analytics, and backend development. This site serves as a space to showcase my projects, skills, and ambitions while sharing my journey towards becoming a data scientist.
 
