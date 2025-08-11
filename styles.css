@@ -11,25 +11,6 @@ body {
     font-family: 'Courier New', monospace;
 }
 
-.neon-title {
-    position: fixed;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 4rem;
-    font-weight: bold;
-    color: #00ffff;
-    text-shadow: 
-        0 0 5px #00ffff,
-        0 0 10px #00ffff,
-        0 0 20px #00ffff,
-        0 0 40px #00ffff,
-        0 0 80px #00ffff;
-    animation: flicker 2s infinite alternate;
-    z-index: 100;
-    letter-spacing: 0.2em;
-}
-
 @keyframes flicker {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
         text-shadow: 
@@ -100,37 +81,6 @@ body {
     z-index: 0;
 }
 
-.matrix-column {
-    position: absolute;
-    font-size: 14px;
-    color: #0f3460;
-    animation: matrix-fall linear infinite;
-    font-family: 'Courier New', monospace;
-}
-
-@keyframes matrix-fall {
-    0% {
-        transform: translateY(-100%);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
-}
-
-.content {
-    position: relative;
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: #00ffff;
-    text-align: center;
-    padding: 20px;
-}
 
 .subtitle {
     margin-top: 150px;
@@ -145,16 +95,5 @@ body {
     }
     to {
         text-shadow: 0 0 20px #00ffff80, 0 0 30px #00ffff60;
-    }
-}
-
-@media (max-width: 768px) {
-    .neon-title {
-        font-size: 2.5rem;
-        top: 30px;
-    }
-    .subtitle {
-        margin-top: 120px;
-        font-size: 1rem;
     }
 }

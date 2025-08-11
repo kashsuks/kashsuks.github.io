@@ -21,31 +21,8 @@ function createRain() {
     }
 }
 
-function createMatrixRain() {
-    const matrixContainer = document.querySelector('.matrix-rain');
-    const characters = '01アカサタナハマヤラワ';
-    const numberOfColumns = Math.floor(window.innerWidth / 20);
-    
-    for (let i = 0; i < numberOfColumns; i++) {
-        const column = document.createElement('div');
-        column.className = 'matrix-column';
-        
-        let columnText = '';
-        for (let j = 0; j < 50; j++) {
-            columnText += characters[Math.floor(Math.random() * characters.length)] + '<br>';
-        }
-        
-        column.innerHTML = columnText;
-        column.style.left = `${i * 20}px`;
-        column.style.animationDuration = `${Math.random() * 10 + 5}s`;
-        column.style.animationDelay = `${Math.random() * 5}s`;
-        
-        matrixContainer.appendChild(column);
-    }
-}
 
 createRain();
-createMatrixRain();
 
 setInterval(() => {
     const rainContainer = document.querySelector('.rain-container');
@@ -69,9 +46,3 @@ setInterval(() => {
         rainContainer.appendChild(newDrop);
     }
 }, 200);
-
-window.addEventListener('resize', () => {
-    const matrixContainer = document.querySelector('.matrix-rain');
-    matrixContainer.innerHTML = '';
-    createMatrixRain();
-});
