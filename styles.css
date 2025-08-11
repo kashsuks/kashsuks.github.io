@@ -4,11 +4,21 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Perfect DOS VGA';
+    src: url('assets/Perfect DOS VGA 437 Win.ttf') format('truetype');
+}
+
 body {
     background: #000;
     overflow: hidden;
     height: 100vh;
-    font-family: 'Courier New', monospace;
+    font-family: 'Perfect DOS VGA';
+}
+
+h1 {
+    text-align: center;
+    color: white;
 }
 
 @keyframes flicker {
