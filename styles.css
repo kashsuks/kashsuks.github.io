@@ -24,10 +24,27 @@ h1 {
 }
 
 h2 {
-    margin: 60px 0 0 10%;
+    margin-top: 0;
+    margin-left: 0;
     text-align: left;
     color: #574fb0;
-    font-size: 1.8rem;
+    font-size: 2rem;
+}
+
+.text {
+    position: relative;
+    display: block;
+    margin-top: 20px;
+    width: 60%;
+    margin-left: 10%;
+    margin-right: 20%;
+    padding: 20px;
+    border: 2px solid #0ce6f2;
+    background: #201533;
+    z-index: 2;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 @keyframes flicker {
@@ -99,7 +116,6 @@ h2 {
     height: 100%;
     z-index: 0;
 }
-
 
 .subtitle {
     margin-top: 150px;
