@@ -81,20 +81,6 @@ h2 {
     border-radius: 5px;
 }
 
-.activities-image {
-    flex: 0 0 200px;
-    max-width: 200px;
-}
-
-.activities-image img {
-    margin-top: -50%;
-    margin-left: 160%;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-
 @keyframes flicker {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
         text-shadow: 
