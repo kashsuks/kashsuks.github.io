@@ -63,7 +63,37 @@ h2 {
     box-sizing: border-box;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    border-radius: 5px;
 }
+
+.star-sites {
+    position: absolute;
+    top: calc(60px + 2cm + 20px);
+    left: calc(10% + 60% + 2px);
+    width: calc(25% - 2px);
+    padding: 20px;
+    border: 2px solid #0ce6f2;
+    background: #201533;
+    z-index: 2;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    border-radius: 5px;
+}
+
+.activities-image {
+    flex: 0 0 200px;
+    max-width: 200px;
+}
+
+.activities-image img {
+    margin-top: -50%;
+    margin-left: 160%;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
 
 @keyframes flicker {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
