@@ -24,7 +24,6 @@ p {
     font-size: 1.2rem;
 }
 
-
 li {
     margin-top: 0;
     margin-left: 0;
@@ -165,4 +164,48 @@ h2 {
     to {
         text-shadow: 0 0 20px #00ffff80, 0 0 30px #00ffff60;
     }
+}
+
+.buttons {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    text-align: center;
+}
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.small-buttons img {
+    width: 80px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.large-buttons {
+    margin-top: 15px;
+}
+
+.large-buttons .btn-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    min-width: 100%;
+}
+
+.large-buttons img {
+    width: 88px;
+    height: 31px;
+    flex-shrink: 0;
 }
