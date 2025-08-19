@@ -21,7 +21,6 @@ function createRain() {
     }
 }
 
-
 createRain();
 
 setInterval(() => {
