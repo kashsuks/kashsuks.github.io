@@ -213,3 +213,46 @@ h2 {
 a {
     color: #B9D9EB;
 }
+
+.star-sites {
+    position: absolute;
+    top: calc(60px + 2cm + 20px + 210px);
+    left: calc(10% + 60% + 2px);
+    width: calc(25% - 2px);
+    padding: 20px;
+    border: 2px solid #0ce6f2;
+    background: #201533;
+    z-index: 2;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    border-radius: 5px;
+}
+
+.star-sites h3 {
+    color: #574fb0;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.star-sites ul {
+    list-style: none;
+    padding: 0;
+}
+
+.star-sites li{
+    margin-left: 0;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.star-sites a {
+    color: #B9D9EB;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.star-sites a:hover {
+    color: #0ce6f2;
+    text-shadow: 0 0 5px #0ce6f2;
+}
