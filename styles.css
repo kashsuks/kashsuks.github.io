@@ -209,3 +209,7 @@ h2 {
     height: 31px;
     flex-shrink: 0;
 }
+
+a {
+    color: #B9D9EB;
+}
