@@ -65,7 +65,7 @@ h2 {
     border-radius: 5px;
 }
 
-.star-sites {
+.lastfm {
     position: absolute;
     top: calc(60px + 2cm + 20px);
     left: calc(10% + 60% + 2px);

@@ -14,7 +14,7 @@ async function getTrack() {
 }
 
 async function updateMusicDisplay() {
-    const starSites = document.querySelector('.star-sites');
+    const starSites = document.querySelector('.lastfm');
     const track = await getTrack();
     
     if (!track) {
