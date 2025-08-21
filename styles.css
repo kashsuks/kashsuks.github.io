@@ -68,7 +68,7 @@ h2 {
 .lastfm {
     position: absolute;
     top: calc(60px + 2cm + 20px);
-    left: calc(10% + 60% + 2px);
+    left: calc(10% + 60% + 6.7px);
     width: calc(25% - 2px);
     padding: 20px;
     border: 2px solid #0ce6f2;
@@ -216,8 +216,8 @@ a {
 
 .star-sites {
     position: absolute;
-    top: calc(60px + 2cm + 20px + 210px);
-    left: calc(10% + 60% + 2px);
+    top: calc(60px + 2cm + 20px + 201px);
+    left: calc(10% + 60% + 6.7px);
     width: calc(25% - 2px);
     padding: 20px;
     border: 2px solid #0ce6f2;
