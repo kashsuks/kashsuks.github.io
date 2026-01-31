@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kashyap S</title>
+  <link rel="stylesheet" href="https://mhs-webring.netlify.app/onionring.css">
 </head>
 <body>
   <p>Hey there! I'm Kashyap :p</p>
@@ -19,18 +20,15 @@
   </ul>
   
   <p id="lastfm-stats">Loading music stats...</p>
+  <p id="github-stats">Loading commit stats...</p>
 
   <p>Feel free to contact me: kashyap(at)hackclub(dot)help</p>
 
   <p>My hate for css is what caused this site</p>
 
-  <div id="mycoolring" class="webring-badge">
-    <script src="https://mhs-webring.netlify.app/onionring-variables.js"></script>
-    <script src="https://mhs-webring.netlify.app/onionring-widget.js"></script>
-  </div>
-
-  <link rel="stylesheet" href="https://mhs-webring.netlify.app/onionring.css">
-
+  <script src="https://mhs-webring.netlify.app/onionring-variables.js"></script>
+  <script src="https://mhs-webring.netlify.app/onionring-widget.js"></script>
+  <div id="mycoolring" class="webring-badge"></div>
 
   <script>
     const LASTFM_API_KEY = '84bc3dab1c9bd0d7ad3fce0df740d2eb';
@@ -55,7 +53,57 @@
       }
     }
 
+    async function getYearlyCommits() {
+      const username = "kashsuks";
+      const start = new Date(new Date().getFullYear(), 0, 1);
+      const end = new Date();
+
+      let totalCommits = 0;
+      let page = 1;
+
+      try {
+        while (page <= 10) { 
+          const url = `https://api.github.com/users/${username}/events/public?per_page=100&page=${page}`;
+          const res = await fetch(url, {
+            headers: { "Accept": "application/vnd.github+json" },
+          });
+
+          if (!res.ok) throw new Error(`GitHub HTTP ${res.status}`);
+
+          const events = await res.json();
+          console.log(events);
+          if (!Array.isArray(events) || events.length === 0) break;
+
+          let reachedOldEvents = false;
+
+          for (const ev of events) {
+            const t = new Date(ev.created_at);
+
+            if (t < start) {
+              reachedOldEvents = true;
+              break;
+            }
+
+            if (ev.type === "PushEvent" && ev.payload) {
+              totalCommits += Number(ev.payload.size || 0);
+            }
+          }
+
+          if (reachedOldEvents) break;
+          page++;
+        }
+
+        const year = new Date().getFullYear();
+        document.getElementById("github-stats").textContent =
+          `I made ${totalCommits}${page > 10 ? "+" : ""} commits in ${year}`;
+      } catch (err) {
+        console.error("Error fetching GitHub data:", err);
+        document.getElementById("github-stats").textContent = "Shipping something...";
+      }
+    }
+
     getYearlyScrobbles();
+    getYearlyCommits();
   </script>
 </body>
 </html>
