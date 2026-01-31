@@ -55,49 +55,19 @@
 
     async function getYearlyCommits() {
       const username = "kashsuks";
-      const start = new Date(new Date().getFullYear(), 0, 1);
-      const end = new Date();
-
-      let totalCommits = 0;
-      let page = 1;
+      const workerUrl = "https://commit-counter.ksukshavasi.workers.dev";
 
       try {
-        while (page <= 10) { 
-          const url = `https://api.github.com/users/${username}/events/public?per_page=100&page=${page}`;
-          const res = await fetch(url, {
-            headers: { "Accept": "application/vnd.github+json" },
-          });
+        const res = await fetch(`${workerUrl}?u=${encodeURIComponent(username)}`);
+        const data = await res.json().catch(() => ({}));
 
-          if (!res.ok) throw new Error(`GitHub HTTP ${res.status}`);
-
-          const events = await res.json();
-          console.log(events);
-          if (!Array.isArray(events) || events.length === 0) break;
-
-          let reachedOldEvents = false;
-
-          for (const ev of events) {
-            const t = new Date(ev.created_at);
-
-            if (t < start) {
-              reachedOldEvents = true;
-              break;
-            }
-
-            if (ev.type === "PushEvent" && ev.payload) {
-              totalCommits += Number(ev.payload.size || 0);
-            }
-          }
-
-          if (reachedOldEvents) break;
-          page++;
+        if (!res.ok) {
+          throw new Error(data?.error || `HTTP ${res.status}`);
         }
 
-        const year = new Date().getFullYear();
-        document.getElementById("github-stats").textContent =
-          `I made ${totalCommits}${page > 10 ? "+" : ""} commits in ${year}`;
+        document.getElementById("github-stats").textContent = `I made ${data.totalCommits} commits in ${data.year}`;
       } catch (err) {
-        console.error("Error fetching GitHub data:", err);
+        console.error(err);
         document.getElementById("github-stats").textContent = "Shipping something...";
       }
     }
