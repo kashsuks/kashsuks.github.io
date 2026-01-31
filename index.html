@@ -17,6 +17,8 @@
     <li>Listening to music</li>
     <li>Doomscrolling</li>
   </ul>
+  
+  <p id="lastfm-stats">Loading music stats...</p>
 
   <p>Feel free to contact me: kashyap(at)hackclub(dot)help</p>
 
@@ -31,7 +33,29 @@
 
 
   <script>
-    const LASFM_API_KEY = 'api key'
+    const LASTFM_API_KEY = '84bc3dab1c9bd0d7ad3fce0df740d2eb';
+    const LASTMFM_USERNAME = 'ksuks1';
+
+    async function getYearlyScrobbles() {
+      const CURRENT_YEAR = new Date().getFullYear();
+      const from = Math.floor(new Date(CURRENT_YEAR, 0, 1).getTime() / 1000);
+      const to = Math.floor(Date.now() / 1000);
+
+      const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTMFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&from=${from}&to=${to}&limit=1`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const totalTracks = data.recenttracks['@attr'].total;
+
+        document.getElementById('lastfm-stats').textContent = `I listened to ${totalTracks} songs this year`;
+      } catch (error) {
+        document.getElementById('lastfm-stats').textContent = 'Listening to music...';
+        console.error('Error fetching Last.fm data:', error);
+      }
+    }
+
+    getYearlyScrobbles();
   </script>
 </body>
 </html>
